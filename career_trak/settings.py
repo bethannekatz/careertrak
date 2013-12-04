@@ -14,6 +14,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+os.environ['DATABASE_URL'] = 'postgres://xrnbqkffbvxftd:2JIi4IieGD7PcejL6Xp_pxd5Vz@ec2-107-21-100-118.compute-1.amazonaws.com:5432/d54tadc2pas14f'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
