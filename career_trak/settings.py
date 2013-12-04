@@ -68,7 +68,7 @@ WSGI_APPLICATION = 'career_trak.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'career_trak'),
+        'NAME': ''),
     }
 }
 
