@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends "careerapp/base.html" %}
+<head>
+</head>
+<body>
+	{% block content %}
+	<div class="well container" id="editDiv">
+		<h1>Edit Profile</h1>
+					
+		<!-- Transcript and Letter of Recommendation -->
+		  <!-- Letter of Recommendation Stuff -->
+		  <form enctype="multipart/form-data" action="{% url 'add-letter' %}" method="post">
+		  <input id="pickLetter" type="file" class="btn btn-success btn-default" name="letter" value="Choose Letter of Recommendation">
+		  <input id="uploadLetter" type="submit" class="btn btn-succes btn-defulat" name="letter" value="Upload Letter of Recommendation">
+		  {% csrf_token %}
+		  </form>
+		  
+		  <!--Transcript Stuff -->
+		  <form enctype="multipart/form-data" action="{% url 'add-transcript' %}" method="post">
+		  <input id="pickTranscript" type="file" class="btn btn-success btn-default" name="transcript" value="Choose Transcript">
+		  <input id="uploadTranscript" type="submit" class="btn btn-succes btn-defulat" name="transcript" value="Upload Transcript">
+		  {% csrf_token %}
+		  </form>
+		
+		<form class="navbar-form" enctype="multipart/form-data" action="{% url 'edit' %}" method="post">
+			<input type="text" placeholder="Location" class="form-control editElem" name="location" id="elem1" value="{{profile.location}}"><br><br>
+			<input type="text" placeholder="Industry" class="form-control editElem" name="industry"><br><br>
+			<input type="text" placeholder="Degree Earned" class="form-control editElem" name="degree"><br><br>
+			<button value="Education" class="btn btn-default btn-success">Add Education</button><br><br>
+			<!--input type="text" placeholder="Employer" class="form-control editElem"><br><br>
+			<button value="Employer" class="btn btn-default btn-success">Add Employer</button><br><br>
+			<input value="Change Profile Picture" class="btn btn-default" type="file"><br-->
+			<input type="text" placeholder="Current Jobs" class="form-control" name="currJobs"><br><br>
+			<input type="text" placeholder="Previous Jobs" class="form-control" name="prevJobs"><br><br>
+			<button value="Submit" class="btn btn-default btn-success" type="submit">Submit</button>
+			{% csrf_token %}
+		</form>
+	</div>
+	{% endblock %}
+</body>

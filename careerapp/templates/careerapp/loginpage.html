@@ -1,0 +1,114 @@
+ <html>
+ <!DOCTYPE html>
+ <html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/static/favicon.png">
+	
+	<title> Log In </title>
+	
+	<!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/careertrak.css" rel ="stylesheet">
+   </head>
+	
+	<body>
+	
+	<!-- Static navbar -->
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+       
+	   <div class="navbar-collapse collapse">
+         
+		 <ul class="nav navbar-nav">
+			<!-- Todo figure out why the pic has to be in a link -->
+            <li ><a href="#"><img height="13%" width="50%" src ="/static/images/logo.jpg" alt="http://s.c.lnkd.licdn.com/scds/common/u/img/logos/logo_132x32_2.png" height = "20"/></a></li>
+          </ul>
+		  
+          <ul class="nav navbar-nav navbar-right">
+            <form class="navbar-form navbar-left" role="search" action="{% url 'django.contrib.auth.views.login' %}" method="post">
+					{% if form.errors %}
+						<p style="color:red">
+							Invalid user name and password.
+						</p>
+					 {% endif %}
+					<div class="form-group">
+						<input type="text" placeholder="Email address" class="form-control" name="username" id="id_username"/>
+					</div>
+					<div class="form-group">
+						<input type="password" placeholder="Password" class="form-control" name="password" id="id_password"/>
+					</div>					
+					<button type="submit" value="Search" class="btn btn-default">Log In</button><br>
+					<a href="{% url 'resetpassword' %}"> Forgot password?</a>
+					{% csrf_token %}
+			</form>
+		  </ul>
+        </div><!--/.nav-collapse -->
+		
+      </div>
+    </div>
+	
+	<div class = "container">
+	
+		<div class="row">
+		
+			<div class = "col-md-1">  </div>
+			<div class = "col-md-6">
+			<br><br><br>
+			<!--img src="http://www.budbilanich.com/wp-content/uploads/2012/11/career-success-responsibility.jpg" width = "500" alt="x"></img-->
+			<img src="http://www.careerealism.com/home/jtodonnell/careerealism.com/wp-content/uploads/2011/04/ace-career-fair.jpg" alt="x" width="550"></img>
+			</div>
+			<div class = "col-md-4"> 
+			
+			<br><br><br>
+		
+					<div class = "form-box">
+					
+					<h2> New to CareerTrak?  </h2> 
+					<h3> Register as a <a href="{% url 'register-student' %}"> <i>student</i> </a> or a <a href="{% url 'register-recruiter' %}"><i>recruiter.</i></a> </h3>
+						
+						<!--form class = "form-signin" action="" method="post">
+							{% csrf_token %}
+
+
+							{{form_r}}
+
+							<div class = "row">
+							<div class ="col-md-1"></div>
+							<div class ="col-md-4">
+								<div class="radio">
+								  <label>
+									<input type="radio" name="userType" id="optionsRadios1" value="student" checked>
+									Student
+								  </label>
+								</div>
+							</div>
+							<div class = "col-md-4">
+								<div class="radio">
+								  <label>
+									<input type="radio" name="userType" id="optionsRadios2" value="recruiter">
+									Recruiter
+								  </label>
+								</div>
+							</div>
+							<div class ="col-md-3"/>
+							</div>
+							<button class="btn btn-primary btn-block login-btn" type="submit">Register</button>
+
+						</form-->
+					</div>
+			</div>
+			
+			<div class = "col-md-1"> </div>
+		</div>
+	
+	</div>
+	
+	
+	
+	</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% extends "careerapp/base.html" %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/static/favicon.png">
+
+    <title>Fixed Top Navbar Example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% block css %} /static/css/profile.css {% endblock %}" rel="stylesheet">
+	
+	{% block sheet %}
+	<link href="/static/css/careertrak.css" rel="stylesheet">
+	{% endblock %}
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static/assets/js/html5shiv.js"></script>
+      <script src="/static/assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+	{% block title %} Search Results {% endblock %}
+
+		    {% block content %}
+				<div class="container">
+					<div id="infoDiv" class="block">
+						<h1> Opportunities From Companies You Follow</h1>
+					</div>
+				</div>
+			
+			<br>
+			<br>
+			
+			{% for posting in postings %}
+			<div class="container ">
+                {% for photo in photos %}
+                {% ifequal posting.company.name photo.company.name %}
+				<img src="{% url 'get-photo' photo.id %}" width="20%" height="30%" style="float:left">
+                {% end ifequal %}
+				<div id="infoDiv" class="block">
+					<ul class="nav well searchresult">
+						<li><h2><a href="#">{{posting.name}}</a> - {{posting.company}}</h2></li>
+						<li><h3> Job Posting<h3></li>
+						<li><h4> Posted: {{posting.creation_date}}</h4></li>
+						<li><a href="/posting"><button type="submit" class="btn btn-default btn-success">Apply on company website</button></a></li>
+						
+					</ul>
+				</div>
+                {% endfor %}
+			</div>
+			
+			{% endfor %}
+			
+			STATIC BELOW
+			<div class="container ">
+				<img src="/static/images/google.png" width="20%" height="30%" style="float:left">
+				<div id="infoDiv" class="block">
+					<ul class="nav well searchresult">
+						<li><h2><a href="#">Developer</a> - Google </h2></li>
+						<li><h3> Job Posting<h3></li>
+						<li><h4> Posted 19 hours ago </h4></li>
+						<li><a href="/posting"><button type="submit" class="btn btn-default btn-success">Apply on company website</button></a></li>						
+					</ul>
+				</div>
+			</div>
+
+			<div class="container ">
+				<img src="/static/images/amazon.jpg" width="20%" height="30%" style="float:left">
+				<div id="infoDiv" class="block">
+					<ul class="nav well searchresult">
+						<li><h2><a href="#">Software Engineer</a> - Amazon</h2></li>
+						<li><h3> Job Posting<h3></li>
+						<li><h4> Posted 23 hours ago </h4></li>
+						<li><a href="/posting"><button type="submit" class="btn btn-default btn-success">Apply on company website</button></a></li>					
+					</ul>
+				</div>
+			</div>
+			{% endblock %}
+          </div><!--/row-->
+        </div><!--/span-->
+		
+  </body>
+</html>

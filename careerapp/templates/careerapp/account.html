@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends "careerapp/base.html" %}
+<head>
+</head>
+<body>
+	{% block content %}
+	<div class="well container" id="editDiv">
+		<h1>General Account Settings </h1>
+		<hr><br>
+			
+			<a href="{% url 'editpassword' %}"><button class="btn btn-default btn-success">Change Password</button></a><br><br>
+			{% csrf_token %}
+
+	</div>
+	{% endblock %}
+</body>

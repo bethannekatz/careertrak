@@ -1,0 +1,26 @@
+
+.form-padding{
+	margin: 9px;
+}
+
+.login-btn{
+
+	margin-left:8px;
+	height: 45px;
+	background-color: #eddb11;
+	border-color:#e9ac1a;
+}
+
+
+
+.searchresult{
+	margin-top:0px;
+	margin-bottom:0px;
+	padding-top: 0px;
+	padding-bottom:0px;
+}
+
+.center-form{
+	margin:0 auto;
+	width: 70%;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+{% extends "careerapp/base.html" %}
+<html lang="en">
+  <head>
+  </head>
+
+  <body>
+
+	{% block title %} Company Profile Page {% endblock %}
+
+		    {% block content %}
+			<div class="row">
+				<div class="jumbotron container block span4" id="profileDiv">
+
+					{% if photoID %}
+						<img src="{% url 'get-photo' photoID %}" alt="profilePicture" width="40%" height="40%">
+					{% endif %}
+                    {% if user.userProfile.userType == "recruiter" %}
+							{% if user.userProfile.company.name == company.name %}
+                                <form enctype="multipart/form-data" action="{% url 'add-company-photo' %}" method="post">
+						            <input id="pickPhoto" type="file" class="btn btn-success btn-default" name="picture" value="Choose Photo" style="width:15em">
+						            <input id="uploadPhoto" type="submit" class="btn btn-success btn-default" name="uploadPhoto" value="Upload Photo">
+						            {% csrf_token %}
+					            </form>
+                        {% endif %}
+                    {% endif %}
+
+                    <div id="infoDiv" class="block">
+						<ul class="nav well">
+							<li><h2>{{company}}</h2></li>
+							<li><h3>{{company}} is a Software Engineering Company<h3></li>
+							<li><h4> Seattle, Washington | 10,000+ Employees </h4></li>
+						</ul>
+						{% if user.userProfile.userType == "student" %}
+						<form action="{% url 'follow' company.id %}" method="post">
+							<button class="btn btn-default">Follow</button>
+							{% csrf_token %}
+						</form>
+						{% endif %}
+						
+						{% if user.userProfile.userType == "recruiter" %}
+							{% if user.userProfile.company.name == company.name %}
+								<a href="{% url 'post-job' company.id %}"> Post Job </a>
+							{% endif %}
+						{% endif %}
+
+					</div>
+				</div>
+			</div>
+			
+		  {% endblock %}
+          <div class="row">
+		  {% block info %}
+		  
+		  <!--div class="container">
+			<div class="row">
+				<h2><small>Hover and click on a star</small></h2>
+			</div>
+			<div class="row lead">
+				<div id="stars" class="starrr"></div>
+					You gave a rating of <span id="count">0</span> star(s)
+				</div>
+		</div-->
+		
+			<div class="container">
+				<div class="row">
+					<h3>Average Rating For This Company: {{company.rating}} </h3>
+					<form action="{% url 'rating' company.id %}" method="post">
+						<h4>Please Rate This Company</h4>
+						<input type="radio" name="rating" value="1" class="glyphicon glyphicon-star">1
+						<input type="radio" name="rating" value="2" class="glyphicon glyphicon-star">2
+						<input type="radio" name="rating" value="3" class="glyphicon glyphicon-star">3
+						<input type="radio" name="rating" value="4" class="glyphicon glyphicon-star">4
+						<input type="radio" name="rating" value="5" class="glyphicon glyphicon-star">5<br>
+						<input type="submit" value="Submit" class="btn btn-success">
+						{% csrf_token %}
+					</form>
+				</div>
+			</div>
+		  
+			<h1>Job Postings</h1>
+			
+			{% if jobs %}
+			testing output
+			{% endif %}
+			
+			{% for job in jobs %}
+				<div class="row">
+					<div class="span4 well">
+						<h2>{{job.name}}</h2>
+						<li><p>{{job.text}}</p><br>
+						<p><a class="btn btn-default" href="/posting">View details &raquo;</a></p>
+					</div>
+				</div>			
+			{% endfor %}
+
+			<div class="row">
+				<div class="span4 nav well">
+					<h2>Babysitting</h2>
+					<li><p>Why would you come to Microsoft to babysit? Who knows!</p><br>
+					<p><a class="btn btn-default" href="/posting">View details &raquo;</a></p>
+				</div>
+			</div>
+			<!--/span-->
+			{% endblock %}
+          </div><!--/row-->
+        </div><!--/span-->
+		
+		{% block sidebar %}
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="well sidebar-nav">
+            <ul class="nav">
+              <li>Recruiters From This Company</li>
+              <li class="active"><a href="#">Ben Jamin</a></li>
+              <li><a href="#">Charlie Garrod</a></li>
+              <li><a href="#">Ajmal Thanikkal</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+	  
+	  
+      <script src="/static/js/star.js"></script>
+	  {% endblock %}
+		
+  </body>
+</html>

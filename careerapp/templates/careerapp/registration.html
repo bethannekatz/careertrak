@@ -1,0 +1,10 @@
+REGISTRATION FORM GOES HERE
+
+{{userType}}
+
+<form method="post">
+    {{ uform.as_p }}
+    {{ pform.as_p }}
+    <input type="submit">
+	{% csrf_token %}
+</form>

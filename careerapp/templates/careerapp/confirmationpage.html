@@ -1,0 +1,78 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/static/favicon.png">
+
+    <title>{% block title %} Career Trak {% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% block css %}/static/css/navbar-fixed-top.css {% endblock %}" rel="stylesheet">
+	
+	{% block sheet %}
+	<link href="/static/css/careertrak.css" rel="stylesheet">
+	{% endblock %}
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static/assets/js/html5shiv.js"></script>
+      <script src="/static/assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+	<!-- Body HTML -->
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+		  {% block content %}
+
+	
+	<div class="container">
+		<p>
+		<h1>Welcome!</h1>
+		
+		Thank you for registering with CareerTrak. A confirmation email has been sent to your inbox <br>
+		
+		Return to the login page <a href="/" >here </a>
+
+
+		</p>
+	</div>	  
+		  
+		  
+		 		  
+		  {% endblock %}
+
+        </div><!--/span-->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; CareerTrak 2013</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
+</html>

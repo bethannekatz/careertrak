@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% extends "careerapp/base.html" %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/static/favicon.png">
+
+    <title>Fixed Top Navbar Example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% block css %} /static/css/profile.css {% endblock %}" rel="stylesheet">
+	
+	{% block sheet %}
+	<link href="/static/css/careertrak.css" rel="stylesheet">
+	{% endblock %}
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static/assets/js/html5shiv.js"></script>
+      <script src="/static/assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+	{% block title %} Search Results {% endblock %}
+
+		    {% block content %}
+			{{results}}
+			<div class="searchBox">
+			{% for result in results %}
+
+			<div class="container resultdiv">
+				<div class="resultPic">
+                {% for photo in photos %}
+				{% if result.get_resulttype == 'Company' %}
+					<a href="{% url 'company' result.id %}">{% ifequal result.name photo.company.name %}<img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">{% endifequal %}</a>
+				
+				{% elif result.get_resulttype == 'student' %}
+					<a href="{% url 'true-profile' result.id %}"><img src="/static/images/microsoft.png" width="20%" height="20%" style="float:left"></a>
+				
+				{% elif result.get_resulttype == 'recruiter' %}
+					<a href="{% url 'true-profile' result.id %}"><img src="/static/images/microsoft.png" width="20%" height="20%" style="float:left"></a>
+
+				{% elif result.get_resulttype == 'Job Posting' %}
+				<a href="{% url 'company' result.company.id %}"><img src="/static/images/microsoft.png" width="20%" height="20%" style="float:left"></a>
+			
+				{% endif %}
+                {% endfor %}
+				
+				</div>
+				<div class="infoDiv block">
+					<div class="searchContent">
+						{% if result.get_resulttype == 'Company' %}
+						<div class="searchItemHead"> <a href="{% url 'company' result.id %}"><strong>{{result.get_name}}</strong></a>  - {{result.get_tag}}</div>
+						<div class="resultType">{{result.get_resulttype}}</div>
+						{% elif result.get_resulttype == 'student' %}
+						<div class="searchItemHead"> <a href="{% url 'true-profile' result.id %}"><strong>{{result.get_name}}</strong></a></div>
+						<div class="resultType">{{result.get_tag}}</div>
+						{% elif result.get_resulttype == 'recruiter' %}						
+						<div class="searchItemHead"> <a href="{% url 'true-profile' result.id %}"><strong>{{result.get_name}}</strong></a></div>
+						<div class="resultType">{{result.get_tag}}</div>
+						
+						{% elif result.get_resulttype == 'Job Posting' %}
+						<div class="searchItemHead"> <a href="{% url 'jobPosting' result.id %}"><strong>{{result.get_name}}</strong></a></div>						
+						{% endif %}
+
+
+
+							<!--form>
+							<button type="submit" class="btn btn-default btn-success">Apply on company website</button>
+							</form-->
+
+					</div>
+					</div>
+			</div>
+			
+			{% endfor %}
+			</div>		
+
+			{% endblock %}
+          </div><!--/row-->
+        </div><!--/span-->
+		
+  </body>
+</html>

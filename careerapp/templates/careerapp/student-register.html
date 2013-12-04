@@ -1,0 +1,53 @@
+ <html>
+ <!DOCTYPE html>
+ <html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/static/favicon.png">
+	
+	<title> Student Registration </title>
+	
+	<!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/careertrak.css" rel ="stylesheet">
+   </head>
+	
+	<body>
+		<div class = "row">
+			<div class = "col-md-1"></div>
+			<div class = "col-md-1">
+				<h1> CareerTrak </h1>
+			</div>
+			<div class = "col-md-10"></div>
+		</div>
+		<div class = "container">
+			<div class ="row">
+				<br><br>
+				<div class = "col-md-3"></div>
+				<div class = "col-md-5">
+					<! -- Log in form in a centered div -->
+					<div class = "form-box">
+						<form class = "form-signin" method ="post" action="{% url 'register-student' %}">
+						
+						{{form_r}}
+						<button class="btn btn-primary btn-block login-btn" type="submit">Register</button>
+						{% csrf_token %}
+						
+						</form>
+					</div>
+				</div>
+				<div class = "col-md-4"></div>
+			</div>
+
+		</div>
+	
+
+	
+	
+	
+	</body>
+</html>

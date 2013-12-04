@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% extends "careerapp/base.html" %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/static/favicon.png">
+
+    <title>Fixed Top Navbar Example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% block css %} /static/css/profile.css {% endblock %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static/assets/js/html5shiv.js"></script>
+      <script src="/static/assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+	{% block title %} Profile Page {% endblock %}
+
+		    {% block content %}
+			<div class="row">
+				<div class="jumbotron container block span4" id="profileDiv" style="float:left">
+					<div class="col-md-4">
+						{% if photoID %}
+						<img src="{% url 'get-photo' photoID %}" alt="profilePicture" width="90%" height="90%">
+						{% endif %}
+						
+						{% if canEdit %}
+						<form enctype="multipart/form-data" action="{% url 'add-photo' %}" method="post">
+							<input id="pickPhoto" type="file" class="btn btn-success btn-default" name="picture" value="Choose Photo" style="width:15em">
+							<input id="uploadPhoto" type="submit" class="btn btn-success btn-default" name="uploadPhoto" value="Upload Photo">
+							{% csrf_token %}
+						</form>
+						{% endif %}
+						{% if canRequest %}
+						
+						{% if pendingRequest == 'pending' %}
+							<p>Request Pending</p>
+						{% else %}
+							<a href="{% url 'request-connect' pg_user.id %}"> <button class="btn btn-default">Connect</button> </a>
+						{% endif %}
+		
+						{% endif %}
+						
+
+
+						
+
+						
+					</div>
+					<div id="infoDiv" class="col-sm-8 col-md-8">
+						<ul class="nav well">
+
+							<li><h2>{{pg_user.first_name}} {{pg_user.last_name}}  </h2></li>
+							{% if isStudent %}
+							<li><h3>{{pg_user.first_name}} {{pg_user.last_name}} is a {{pg_user.userProfile.userType}} at {{pg_user.userProfile.school.name}}<h3></li>
+							<li><h4>{{pg_user.userProfile.location}} {% if pg_user.userProfile.location and pg_user.userProfile.industry %}|{% endif%} {{pg_user.userProfile.industry}} </h4></li>
+							<li><h5>{% if pg_user.userProfile.currJobs %}<b>Current Jobs:  </b>{{currJobs}}</h5></li>{% endif %}
+							<li><h5>{% if pg_user.userProfile.prevJobs %}<b>Previous Jobs:  </b>{{prevJobs}}</h5></li>{% endif %}
+							<li><h5><b>Education:  </b>{{userProfile.degree}} {% if userProfile.degree and userProfile.school %} from {% endif %}{{pg_user.userProfile.school.name}}</h5></li>
+							{% endif %}
+							{% if isRecruiter %}
+							<li><h3>{{pg_user.first_name}} {{pg_user.last_name}} is a {{pg_user.userProfile.userType}} at {{pg_user.userProfile.company.name}}<h3></li>
+							{% endif %}
+
+						</ul>
+						<!--form-->
+						{% if canEdit %}
+						<a href="{% url 'edit' %}"> <button  class="btn btn-default btn-success">Edit</button></a>
+						{% endif %}
+						
+						{% if connections %}
+						<br>
+						<strong> My Connections </strong><br>
+						
+						{% for user in connections %}
+							Connection: {{user.first_name}} {{user.last_name}} <br>
+						{% endfor %}
+						
+						{% endif %}
+						
+						
+						{% if connectrequests %}
+						<br>
+						<strong> Connection Requests </strong><br>
+						
+						{% for requestuser in connectrequests %}
+							Accept <a href="{% url 'accept' requestuser.id %}">{{requestuser.first_name}} {{requestuser.last_name}}</a> <br>
+						{% endfor %}
+						
+						{% endif %}
+						<!--/form-->
+					</div>
+				</div>
+			</div>
+			
+			
+			
+		  {% endblock %}
+          <div class="row">
+		  {% block info %}
+		  {% if isStudent %}
+		  {% if canEdit %}
+
+		  {% if transcriptID %}
+		  <object src="{% url 'get-transcript' transcriptID %}" alt="transcript"><a href="{% url 'get-transcript' transcriptID %}">Transcript</a></object>
+		  {% endif %}
+		  {% if letterID %}
+		  <object src="{% url 'get-letter' letterID %}" alt="letter"><a href="{% url 'get-letter' letterID %}">Letter of Recommendation</a></object>
+		  {% endif %}
+		  {% endif %}
+            <div class="row">
+				<div class="span4 well">
+					<h2>Background</h2>
+					<p>I am an Electrical and Computer Engineering major with minors in both Computer Science and Spanish. I have done extensive work with Python, C and web based programming. Current classes include Computer Systems, Analog Circuitry and Mathematics of Electrical Engineering. My work experience includes a three-month internship in the technology division of Goldman Sachs and research for Disney Research Pittsburgh.</p>
+					<p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+				</div>
+			</div><!--/span-->
+			<div class="row">
+				<div class="span4 nav well">
+					<h2>Experience</h2>
+					<li><h3>Microsoft Program Manager Intern</h3><br>
+					     <p>Designed new system to release Windows Updates to customers.</p></li>
+				</div>
+			</div><!--/span-->
+			<div class="row">
+				<div class="span4 nav well">
+					<h2>Experience</h2>
+					<li><h3>Google Engineering Practicum Intern</h3><br>
+					     <p>Wrote tool for hardware profiling.</p></li>
+				</div>
+			</div><!--/span-->
+			{% endif %}
+			{% endblock %}
+          </div><!--/row-->
+        </div><!--/span-->
+		
+  </body>
+</html>

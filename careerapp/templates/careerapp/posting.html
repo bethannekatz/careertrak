@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% extends "careerapp/base.html" %}
+<head>
+</head>
+<body>
+	{% block content %}
+	<div class="container">
+		<img src="/static/images/microsoft.png" width="25%" height="25%" style="float:left">
+		<div id="infoDiv" class="block">
+			<ul class="nav well">
+				<li><h2>{{job.title}}</h2></li>
+				<li><h3><a href="http://www.microsoft.com/">{{job.company.name}}</a> - {{job.company.location}}<h3></li>
+				<li><h4> Posted {{job.creation_time}} </h4></li>
+				<form>
+				<button type="submit" class="btn btn-default btn-success">Apply on company website</button>
+				</form>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="container">
+		<p>
+		<h1>Job Description</h1>
+		{% if job.category %}
+		<b>Job Category: </b> {{job.category}}<br>
+		{% endif %}
+		
+		{% if job.location %}
+		<b>Location: </b>{{job.location}}<br>
+		{% endif %}
+		
+		<b>JobID: </b>Should This Still Be A Field?<br>
+		{% if job.division %}
+		<b>Division: </b>{{job.division}}<br>
+		{% endif %}
+		<br>
+		
+		{{job.text}}
+		
+		<br><hr>BELOW IS STATIC TEXT <br> <hr>
+		
+		This Job is eligible for the following work arrangements :TeleWork
+		US Public Sector Partner Mission. <br>
+
+The Public Sector Partner mission is: As One Microsoft, Invest and Extend the US Public Sector Partner Ecosystem to make a difference and drive impact, revenue and growth in Education, Government & Health. <br>
+
+The US Public Sector Healthcare & Life Sciences Business represents one of the most strategic growth bets at Microsoft and partners are critical to scaling our solutions, services and device offerings. This is your chance to play a strategic role by leading the partner eco-system and driving a plan that will enable our partners to bring Microsoft's healthcare solutions to market. <br><br>
+
+<b>Role Purpose</b><br>
+The Partner Team Director role is a leadership position that requires working across multiple Microsoft organizations to develop, influence and execute a senior level USPS Health and Lifes Sciences Partner Strategy. The role will require working collaboratively with the USPS Healthcare Sales Organization, USEPG Organization, WW Public Sector, WPG and other organizations and business groups needed to drive success. The role will add value by leading the development of a scalable and sustainable partner ecosystem across, Healthcare Payors, Providers and Life Sciences. Responsibilities will include executing the current Partner Priorities and looking for ways to optimize the results of the organization. <br>
+
+Success is measured by Healthcare and Life Sciences Partner Sales, Partner Pipeline, Partner Attach, SPLA and ISV Royalty Revenue and contribution to the US Healthcare and Life Sciences Scorecard; partner satisfaction as measured by high NSAT scores and positive anecdotal feedback from partners; and positive feedback or scores/ratings on Manager Feedback and WHI (Workgroup Health Index).<br>
+
+The role adds value to partners by helping them understand and drive new opportunities for their business and deepen their strategic relationship with Microsoft. Success is measured by partners who view Microsoft as an enabler to their businesses and who rank their partnership with Microsoft as 1 of their top 3. In order to meet these objectives, you will need to:<br>
+Identify our HLS Partner Ecosystem and develop and execute quality Partner Solution plans that align with the market needs and the Partner’s Business Plan.<br>
+Work across the Partner Team Units enabling the teams to effectively deliver the HLS strategy to all relevant partners across Payer, Provider, LS and HHS. <br>
+Develop and maintain broad and deep external partner relationships across all HLS solution areas and workloads/capabilities.<br>
+Ensure that Microsoft account and opportunity teams are well-orchestrated with their partner counterparts and leveraged around accounts and opportunities, by communicating the vision, strategy and capabilities of each partner, handing off opportunities to team members and providing feedback as needed<br>
+Help develop high-performing HLS sales teams that work in collaboration with the field and the partner to enable, grow and win HLS business. <br>
+Develop and grow strong customer executive relationships between Microsoft and partners.<br>
+Evangelize and drive the discussion with Microsoft BG’s, WWPS, USEPG, and other business leaders as to the unique market.<br>
+Drive integration and orchestration within the Leadership team. <br>
+Produce high-quality leads through engagements (marketing/prospecting) with partners.<br>
+Manage healthy and predictable partner-driven pipelines that include qualified opportunities.<br><br>
+
+
+<b>How is role unique from other roles?</b><br>
+The HLS Partner Director role is unique in that it:<br>
+Is responsible for representing the GM of USPS Partner Strategy in Executive level meetings with the Business Group and Sales Segment Leads across Microsoft regarding HLS.<br>
+As a member of the USPS Partner Leadership team in formulating HLS Partner Strategy across the PS Partner Organization.<br>
+Collaborating and Communicating directly with the USPS Leadership Team on matters affecting HLS Partners.<br>
+Its in-depth knowledge of Microsoft HLS value proposition, markets, business challenges and customer opportunities.<br>
+Its focus on articulating to partners the value of Microsoft as an HLS provider and demonstrating Microsoft’s commitment to helping customers solve their challenges and grow their businesses.<br>
+Its focus on articulating the value that Microsoft provides to partners in helping them grow their respective businesses.<br>
+Its ability to coordinate the partner sales planning efforts between internal resources (other xTU team members, account teams, marketing and Microsoft executives) and the partners.<br><br>
+
+
+<b>What are key initiatives and challenges facing this role over the next six months to three years? </b><br>
+Strong focus on current sales priorities, opportunities, revenue accountability, metrics and partner priorities for HLS. <br>
+A greater focus on representing PS Partner at the Executive levels of Microsoft.<br>
+Better differentiation on Roles and Responsibilities with both the WW DPE and US DPE organizations.<br>
+Landing our PHLS Partner Strategy to the US Healthcare and Life Sciences Organization. <br>
+A great level of orchestration across Sales, Services and Marketing to enable HLS partners.<br><br>
+
+<b>Knowledge, Skills and Experience</b><br>
+
+1. Experience - Excellent verbal and written communication skills with equally good listening, team leadership and excellence in execution skills. 5 - 10 years of proven sales and sales management experience in Enterprise accounts and a track record of working with a wide range of business partners. Extensive experience leading through-partner or channel sales teams who had to rely on a range of internal individuals - direct sales, technical specialists, services - to achieve their goals. Demonstrate knowledge of the business drivers within a specific partner set. <br>
+2. Technical /Functional Skills - An understanding of Microsoft technologies and our license programs. Passion for sales within a technology environment and driving business value.<br>
+
+3. Industry Skills - Strong understanding and previous experience in the Healthcare and Life Sciences Industry.<br>
+
+4. Personal Attributes - Executive Presence, Senior Leadership Skills, Highly motivated leader with a mature and positive attitude, proven experience for overseeing sales teams and working with partners on driving the sales of Microsoft technologies, and strong business and financial acumen a strong plus.<br>
+
+5. Qualifications - Degree preferred with 5 to 10 years of proven IT sales, direct or channel, experience. Additional sales or marketing qualifications centered on driving business value through the use of technology beneficial. <br>
+
+Although this role is non-location specific, candidate should be located in an east coast area with easy access to New York, DC, and Malvern.<br>
+		</p>
+	</div>
+	{% endblock %}
+</body>
