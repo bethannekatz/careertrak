@@ -32,6 +32,13 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+ADMINS = (
+     ('Ajmal Thanikkal', 'athanikk@andrew.cmu.edu'),
+	 ('Beth Anne Katz', 'bkatz@andrew.cmu.edu'),
+)
+
+MANAGERS = ADMINS
+
 
 # Application definition
 
@@ -74,7 +81,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Eastern'
 
 USE_I18N = True
 
