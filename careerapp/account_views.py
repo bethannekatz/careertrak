@@ -251,9 +251,12 @@ def just_registered(request):
 @transaction.commit_on_success
 def loadschools(request):
         context ={}
-        school1 = School(name="Carnegie Mellon University", email="cmu.edu")
-        school2 = School(name="Harvey Mudd", email="hmc.edu")
-        school3 = School(name="MIT", email="mit.edu")
+        #school1 = School(name="Carnegie Mellon University", email="cmu.edu")
+        #school2 = School(name="Harvey Mudd", email="hmc.edu")
+        #school3 = School(name="MIT", email="mit.edu")
+        school1 = School(name="C", email="cmu.edu")
+        school2 = School(name="H", email="hmc.edu")
+        school3 = School(name="M", email="mit.edu")
         school1.save()
         school2.save()
         school3.save()
