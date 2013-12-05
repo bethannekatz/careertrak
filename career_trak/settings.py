@@ -96,6 +96,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+LOGIN_URL = '/'
+
+LOGIN_REDIRECT_URL = '/profile'
+
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES = {}
