@@ -29,7 +29,7 @@ class StudentRegistrationForm(forms.Form):
                                 label="",
                                 widget = forms.PasswordInput(attrs={'class': 'form-control form-padding', 'placeholder': 'Confirm password'}))
 
-    emailaddress = forms.EmailField(max_length = 200,
+    emailaddress = forms.CharField(max_length = 200,
                                 label="",   
                                 widget = forms.TextInput(attrs={'class': 'form-control form-padding', 'placeholder': 'School email address'}))
 
