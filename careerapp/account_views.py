@@ -253,7 +253,7 @@ def loadschools(request):
         context ={}
         school1 = School(name="Carnegie Mellon University", email="cmu.edu")
         school2 = School(name="Harvey Mudd", email="hmc.edu")
-        school3 = School(name="MIT", email="mit.edu")]
+        school3 = School(name="MIT", email="mit.edu")
         school1.save()
         school2.save()
         school3.save()
