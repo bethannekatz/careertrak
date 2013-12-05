@@ -181,11 +181,11 @@ def register_student(request):
 
         recip_list = []
         recip_list.append(email_addr)
-        send_mail(subject ="Welcome to CareerTrak!",
-              message = 'Click this link to complete'+
-              'the registration process: localhost:8000/confirm/'+str(username_)+'/'+str(token),
-              from_email = 'athanikk@andrew.cmu.edu',
-              recipient_list = recip_list)        
+        #send_mail(subject ="Welcome to CareerTrak!",
+        #      message = 'Click this link to complete'+
+        #      'the registration process: localhost:8000/confirm/'+str(username_)+'/'+str(token),
+        #      from_email = 'athanikk@andrew.cmu.edu',
+        #      recipient_list = recip_list)        
         
         return redirect('just_registered')
 
@@ -229,11 +229,11 @@ def register_recruiter(request):
 
         recip_list = []
         recip_list.append(email_addr)
-        send_mail(subject ="Welcome to CareerTrak!",
-              message = 'Click this link to complete'+
-              'the registration process: localhost:8000/confirm/'+str(username_)+'/'+str(token),
-              from_email = 'athanikk@andrew.cmu.edu',
-              recipient_list = recip_list)  
+        #send_mail(subject ="Welcome to CareerTrak!",
+         #     message = 'Click this link to complete'+
+          #    'the registration process: localhost:8000/confirm/'+str(username_)+'/'+str(token),
+           #   from_email = 'athanikk@andrew.cmu.edu',
+            #  recipient_list = recip_list)  
         
                    
         return redirect("just_registered")
