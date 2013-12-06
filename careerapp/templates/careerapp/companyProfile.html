@@ -2,10 +2,14 @@
 {% extends "careerapp/base.html" %}
 <html lang="en">
 
+{% block sheet %}
+	<link href="/static/css/careertrak.css" rel="stylesheet">
+	<link href="/static/css/companyProfile.css" rel="stylesheet">
+{% endblock %}
+
  {% block scripts %}
  	<script type="text/javascript" src="/static/js/jquery-1.10.2.js"></script>
  	<script type="text/javascript" src="/static/js/companyProfile.js"></script>
-	
  {% endblock %}
 
   <body>
@@ -68,7 +72,7 @@
 		
 			<div class="container">
 				<div class="row">
-					<h3>Average Rating For This Company: {{company.rating}} </h3>
+					<h3>Average Rating For This Company: {{company.rating}} <span class="stars">4.8618164</span></h3>
 					<form action="{% url 'rating' company.id %}" method="post">
 						<h4>Please Rate This Company</h4>
 						<input type="radio" name="rating" value="1" >1
