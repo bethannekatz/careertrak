@@ -38,7 +38,7 @@
 
 			<div class="container resultdiv">
 				<div class="resultPic">
-				testpic
+				<h2>Results for {{query}}</h2>
                 {% for photo in photos %}
 				{% if result.get_resulttype == 'Company' %}
 					<a href="{% url 'company' result.id %}">{% ifequal result.name photo.company.name %}<img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">{% endifequal %}</a>

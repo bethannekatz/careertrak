@@ -171,6 +171,7 @@ def search(request):
 ##
        
         context['results'] = resultList
+        context['query'] = request.POST['query']
 
         # adding company photos
         photos = Photo.objects.all()
