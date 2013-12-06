@@ -96,11 +96,6 @@ EMAIL_PORT = 587
 
 EMAIL_USE_TLS = True
 
-# Email
-EMAIL_HOST = 'smtp.gmail.com'
-
-EMAIL_HOST_USER = 'car
-
 
 
 # Static files (CSS, JavaScript, Images)
