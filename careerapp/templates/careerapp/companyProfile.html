@@ -64,7 +64,7 @@
 		
 			<div class="container">
 				<div class="row">
-					<h3>Average Rating For This Company: {% for rating in company.rating|get_range %} <i class="glyphicon glyphicon-star"></i>{{endfor}}</h3>
+					<h3>Average Rating For This Company: {% for rating in company.rating|get_range %} <i class="glyphicon glyphicon-star"></i>{% endfor %}</h3>
 					<form action="{% url 'rating' company.id %}" method="post">
 						<h4>Please Rate This Company</h4>
 						<input type="radio" name="rating" value="1" >1

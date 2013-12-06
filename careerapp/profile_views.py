@@ -4,6 +4,9 @@ from django.core.urlresolvers import reverse
 from careerapp.models import *
 from careerapp.forms import *
 
+from django.template import Library
+register = Library()
+
 # Used to send mail from within Django
 from django.core.mail import send_mail
 
@@ -148,6 +151,11 @@ def rating(request, companyID):
                         return redirect('/company/' + str(companyID))
         else:
                 return redirect('/company/' + str(companyID))
+
+@register.filter         
+def get_range(value):
+        return range(value)
+
 
 @login_required
 @transaction.commit_on_success
