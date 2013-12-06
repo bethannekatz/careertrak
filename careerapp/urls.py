@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
         # initialization
         url(r'^resetdb$', 'careerapp.init_views.resetdb'),
+        url(r'^loadschools$', 'careerapp.account_views.loadschools'),
 
         ########################
         #  Account Management  #

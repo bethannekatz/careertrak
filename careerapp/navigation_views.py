@@ -159,7 +159,7 @@ def search(request):
 
         queryString = request.POST['query']
         resultList = []
-        resultList.extend(Company.objects.filter(name__contains=queryString))
+        resultList.extend(Company.objects.filter(name__icontains=queryString))
         resultList.extend(UserProfile.objects.filter(school__name__icontains=queryString))
         resultList.extend(UserProfile.objects.filter(user__first_name__icontains=queryString))
         resultList.extend(UserProfile.objects.filter(user__last_name__icontains=queryString))
@@ -171,6 +171,7 @@ def search(request):
 ##
        
         context['results'] = resultList
+        context['query'] = request.POST['query']
 
         # adding company photos
         photos = Photo.objects.all()
