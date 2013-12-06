@@ -147,8 +147,6 @@ def rating(request, companyID):
                         # figure out why this isn't doing reverse
                         return redirect('/company/' + str(companyID))
         else:
-                message = "No rating selected. You must select a rating to vote."
-                request.user.message_set.create(message = message)
                 return redirect('/company/' + str(companyID))
 
 @login_required
