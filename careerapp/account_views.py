@@ -67,7 +67,7 @@ def reset_password(request):
         recip_list.append(email)
         send_mail(subject ="Welcome to CareerTrak!",
               message = 'Click this link to reset'+
-              'your password to the following temporary one:' + str(token)+ '\n'+ 'localhost:8000/handle-reset-password/'+str(reset_user.username)+'/'+str(token),
+              'your password to the following temporary one:' + str(token)+ '\n'+ 'http://stormy-reef-4979.herokuapp.com/handle-reset-password/'+str(reset_user.username)+'/'+str(token),
               from_email = 'careerapp91@gmail.com',
               recipient_list = recip_list)
 
@@ -183,7 +183,7 @@ def register_student(request):
         recip_list.append(email_addr)
         send_mail(subject ="Welcome to CareerTrak!",
                message = 'Click this link to complete'+
-               'the registration process: localhost:8000/confirm/'+str(username_)+'/'+str(token),
+               'the registration process: http://stormy-reef-4979.herokuapp.com/confirm/'+str(username_)+'/'+str(token),
                from_email = 'careerapp91@gmail.com',
                recipient_list = recip_list)        
         
@@ -231,7 +231,7 @@ def register_recruiter(request):
         recip_list.append(email_addr)
         send_mail(subject ="Welcome to CareerTrak!",
               message = 'Click this link to complete'+
-              'the registration process: localhost:8000/confirm/'+str(username_)+'/'+str(token),
+              'the registration process: http://stormy-reef-4979.herokuapp.com/confirm/'+str(username_)+'/'+str(token),
               from_email = 'careerapp91@gmail.com',
               recipient_list = recip_list)  
         
