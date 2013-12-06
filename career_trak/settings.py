@@ -85,6 +85,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Email
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'careerapp91'
+
+EMAIL_HOST_PASSWORD = 'gitdragon'
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
 
 # Email
 EMAIL_HOST = 'smtp.gmail.com'
