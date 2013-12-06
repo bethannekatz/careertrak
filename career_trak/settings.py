@@ -86,6 +86,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Email
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'car
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
