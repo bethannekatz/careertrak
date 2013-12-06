@@ -12,6 +12,9 @@ from mimetypes import guess_type
 
 urlpatterns = patterns('',
 
+        # initialization
+        url(r'^resetdb$', 'careerapp.init_views.resetdb'),
+
         ########################
         #  Account Management  #
         ########################
@@ -28,7 +31,6 @@ urlpatterns = patterns('',
         url(r'^register-student$', 'careerapp.account_views.register_student', name='register-student'),
         url(r'^register-recruiter$', 'careerapp.account_views.register_recruiter', name='register-recruiter'),
         url(r'^just-registered$', 'careerapp.account_views.just_registered', name='just_registered'),
-        url(r'^loadschools$', 'careerapp.account_views.loadschools'),
 
         ########################
         #  Profile Management  #
