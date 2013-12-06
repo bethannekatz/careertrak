@@ -134,16 +134,22 @@ def trunc(f, n):
 @login_required
 @transaction.commit_on_success
 def rating(request, companyID):
-	rating = int(request.POST['rating'])
-	company = Company.objects.get(pk=companyID)
-	oldNumRated = company.numRated
-	company.numRated += 1
-	floatNum = float((company.rating*oldNumRated + int(rating))/company.numRated)
-	floatNum = trunc(floatNum, 2)
-	company.rating = floatNum
-	company.save()
-	# figure out why this isn't doing reverse
-	return redirect('/company/' + str(companyID))
+        if ('rating' in request.POST and request.POST['rating'] and
+            request.POST['rating'].isdigit()):
+                        rating = int(request.POST.get('rating', False))
+                        company = Company.objects.get(pk=companyID)
+                        oldNumRated = company.numRated
+                        company.numRated += 1
+                        floatNum = float((company.rating*oldNumRated + int(rating))/company.numRated)
+                        floatNum = trunc(floatNum, 2)
+                        company.rating = floatNum
+                        company.save()
+                        # figure out why this isn't doing reverse
+                        return redirect('/company/' + str(companyID))
+        else:
+                message = _("No rating selected. You must select a rating to vote.")
+                request.user.message_set.create(message = message)
+                return redirect('/company/' + str(companyID))
 
 @login_required
 @transaction.commit_on_success
