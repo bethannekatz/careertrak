@@ -16,7 +16,7 @@ urlpatterns = patterns('',
         #  Account Management  #
         ########################
         url(r'^$', 'careerapp.account_views.loginpage'),
-        url(r'^logoutLogin$', 'careerapp.account_views.loginpage'),
+        url(r'^logoutLogin$', 'careerapp.account_views.loginpage',name='logoutLogin'),
 	url(r'^frontpage$', 'careerapp.account_views.loginpage', name='frontpage'),
 	url(r'^login$', 'django.contrib.auth.views.login', {'template_name':'careerapp/loginpage.html'}, name='signin'),	
         url(r'^reset-password$', 'careerapp.account_views.reset_password', name='resetpassword'),

@@ -46,7 +46,7 @@
                 {% for photo in photos %}
                 {% ifequal posting.company.name photo.company.name %}
 				<img src="{% url 'get-photo' photo.id %}" width="20%" height="30%" style="float:left">
-                {% end ifequal %}
+                {% endifequal %}
 				<div id="infoDiv" class="block">
 					<ul class="nav well searchresult">
 						<li><h2><a href="#">{{posting.name}}</a> - {{posting.company}}</h2></li>
