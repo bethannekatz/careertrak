@@ -277,7 +277,7 @@ def addExperience(request):
         new_experience = Experience(user = request.user)
         form = ExperienceForm(request.POST, instance = new_experience)
         if not form.is_valid():
-                context = {'form' : form)
+                context = {'form' : form}
                 return render(request, 'careerapp/addExperience.html', context)
         # if form is valid
         form.save()
