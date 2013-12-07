@@ -54,8 +54,10 @@ def add_company_pic(request):
                 return render(request, 'careerapp/companyProfile.html', context)
 
         # else if POST request
-        print "Company: "
-        print userProf.company.name
+        #delete old photo
+        old_photos = Photo.objects.filter(company=userProf.company)
+        for photo in old_photos:
+                photo.delete()
         new_photo = Photo(user=request.user, company=userProf.company)
         form = PhotoForm(request.POST, request.FILES, instance=new_photo)
         if not form.is_valid():
@@ -101,7 +103,6 @@ def add_letter(request):
 
 @login_required
 def get_photo(request, id):
-        print "in get photo"
 	entry = get_object_or_404(Photo, id=id)
 	if not entry.picture:
 		raise Http404
@@ -162,7 +163,7 @@ def get_range(value):
 def true_profile(request, userID):
         pg_user = User.objects.get(pk = userID)
 
-        photo = Photo.objects.filter(user = pg_user)
+        photo = Photo.objects.filter(user = pg_user, company = None)
         context = {}
 	# If a photo exists
 	if len(photo) > 0:

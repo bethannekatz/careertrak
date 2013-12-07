@@ -33,6 +33,8 @@
 					<div class="col-md-4">
 						{% if photoID %}
 						<img src="{% url 'get-photo' photoID %}" alt="profilePicture" width="90%" height="90%">
+                        {% else %}
+                        <img src="http://www.pledgecents.com/images/ProfilePlaceholderSuit.png" alt="profilePicture" width="90%" height="90%">
 						{% endif %}
 						
 						{% if canEdit %}
