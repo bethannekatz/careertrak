@@ -4,9 +4,6 @@ from django.core.urlresolvers import reverse
 from careerapp.models import *
 from careerapp.forms import *
 
-from django.template import Library
-register = Library()
-
 # Used to send mail from within Django
 from django.core.mail import send_mail
 
@@ -29,16 +26,12 @@ from django.db import transaction
 @login_required		
 def add_profile_pic(request):
         context ={}
-        context['pg_user'] = request.user 
+        context['pg_user'] =request.user 
 	if request.method == "GET":
 		context = {'form':PhotoForm()}
 		return render(request, 'careerapp/trueprofile.html', context)
 	
 	# else if POST request
-	#delete old photo
-        old_photos = Photo.objects.filter(user=request.user, company=None)
-        for photo in old_photos:
-                photo.delete()
 	new_photo = Photo(user=request.user)
 	form = PhotoForm(request.POST, request.FILES, instance=new_photo)
 	if not form.is_valid():
@@ -79,10 +72,6 @@ def add_transcript(request):
 		return render(request, 'careerapp/trueprofile.html', context)
 		
 	# else if POST request
-	#delete old transcript
-        old_transcript = Transcript.objects.filter(user=request.user)
-        for transcript in old_transcripts:
-                transcript.delete()
 	new_transcript = Transcript(user=request.user)
 	form = TranscriptForm(request.POST, request.FILES, instance=new_transcript)
 	print form.errors
@@ -101,10 +90,12 @@ def add_letter(request):
 		return render(request, 'careerapp/trueprofile.html', context)
 		
 	# else if POST request
+
 	# delete old letters
         old_letter = Letter.objects.filter(user=request.user)
         for letter in old_letters:
                 letter.delete()
+
 	new_letter = Letter(user=request.user)
 	form = LetterForm(request.POST, request.FILES, instance=new_letter)
 	print form.errors
@@ -144,33 +135,19 @@ def get_letter(request, id):
 	print content_type
 	return HttpResponse(entry.letter, mimetype=content_type)
 
-# helper function to truncate floats
-def trunc(f, n):
-    slen = len('%.*f' % (n, f))
-    return str(f)[:slen]
-
 @login_required
 @transaction.commit_on_success
 def rating(request, companyID):
-        if ('rating' in request.POST and request.POST['rating'] and
-            request.POST['rating'].isdigit()):
-                        rating = int(request.POST.get('rating', False))
-                        company = Company.objects.get(pk=companyID)
-                        oldNumRated = company.numRated
-                        company.numRated += 1
-                        floatNum = float((company.rating*oldNumRated + int(rating))/company.numRated)
-                        floatNum = trunc(floatNum, 2)
-                        company.rating = floatNum
-                        company.save()
-                        # figure out why this isn't doing reverse
-                        return redirect('/company/' + str(companyID))
-        else:
-                return redirect('/company/' + str(companyID))
-
-@register.filter         
-def get_range(value):
-        return range(value)
-
+	rating = int(request.POST['rating'])
+	company = Company.objects.get(pk=companyID)
+	oldNumRated = company.numRated
+	company.numRated += 1
+	floatNum = float((company.rating*oldNumRated + int(rating))/company.numRated)
+	intNum = int(float((company.rating*oldNumRated + int(rating))/company.numRated))
+	company.rating = intNum
+	company.save()
+	# figure out why this isn't doing reverse
+	return redirect('/company/' + str(companyID))
 
 @login_required
 @transaction.commit_on_success
@@ -180,12 +157,13 @@ def true_profile(request, userID):
         experiences = Experience.objects.filter(user=request.user)
 
         photo = Photo.objects.filter(user = pg_user, company = None)
+
         context = {}
 	# If a photo exists
 	if len(photo) > 0:
                 # grabbing last put-in photo
                 photoIndex = len(photo) - 1
-		context['photoID'] = photo[photoIndex].id
+		context = {'photoID':photo[photoIndex].id}
 	transcript = Transcript.objects.filter(user=pg_user)	
 	if len(transcript) > 0:
 		context['transcriptID'] = transcript[0].id
@@ -235,36 +213,43 @@ def companyProfile(request):
 @login_required
 @transaction.commit_on_success
 def editProfile(request):
+        context = {}
+        userProfile = request.user.userProfile
+        print userProfile
 	if request.method == 'GET':
-                context = {}
-                user = request.user
-                userProfile = UserProfile.objects.get(user=user)
-		context['profile'] = userProfile
+                print "GOT HERE"
+		form = EditProfileForm(instance=userProfile)
+		print "SECOND"
+		context['form'] = form
 		return render(request, 'careerapp/editProfile.html', context)
+
+
+        form = EditProfileForm(request.POST)
+        context['form'] = form
+
+        if not form.is_valid():
+                return render(request, 'careerapp/editProfile.html', context)
+
+
 	
-	userProfile = UserProfile.objects.get(user=request.user)
 	
-	if 'location' in request.POST or request.POST['location']:
-		userProfile.location = request.POST['location']
-		userProfile.save()
+	if 'location' in form.cleaned_data:
+                userProfile.location = form.cleaned_data['location'];
 		
-	if 'industry' in request.POST or request.POST['industry']:
-		userProfile.industry = request.POST['industry']
-		userProfile.save()
+	if 'major' in form.cleaned_data:
+                userProfile.major = form.cleaned_data['major'];
 	
-	if 'degree' in request.POST or request.POST['degree']:
-		userProfile.degree = request.POST['degree']
-		userProfile.save()
+	if 'background' in form.cleaned_data:
+                userProfile.background = form.cleaned_data['background'];
 	
-	if 'currJobs' in request.POST or request.POST['currJobs']:
-		userProfile.currJobs = request.POST['currJobs']
-		userProfile.save()
-		
-	if 'prevJobs' in request.POST or request.POST['prevJobs']:
-		userProfile.prevJobs = request.POST['prevJobs']
-		userProfile.save()
+	if 'degreelevel' in form.cleaned_data:
+                userProfile.degreelevel =  form.cleaned_data['degreelevel'];
+
+        userProfile.save()		
 	
-	return redirect('true-profile/' + str(request.user.id))
+
+	return redirect('true-profile', request.user.id)
+
 
 @login_required
 @transaction.commit_on_success

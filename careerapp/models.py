@@ -34,16 +34,8 @@ class Company(models.Model):
         return "Company"
            
 
+# Information about user of the site, either a student or a recruiter
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, related_name='userProfile')
-    school = models.ForeignKey(School, blank=True, null=True)
-    company = models.ForeignKey(Company, blank=True, null=True, related_name="company")
-    following = models.ManyToManyField(Company, blank=True, related_name="following", through='FollowingCompany')
-    connectRequests = models.ManyToManyField(User, blank=True, related_name="connectRequests")
-    connections = models.ManyToManyField(User, blank=True, related_name="connections")
-    location = models.CharField(max_length=50, blank=True)
-    degree = models.CharField(max_length=50, blank=True)
-    background = models.TextField(max_length=5000, blank=True)
 
 
     STUDENT = 'student'
@@ -54,8 +46,31 @@ class UserProfile(models.Model):
         (RECRUITER, 'Recruiter'),
     )
 
+    BACHELOR = 'B'
+    MASTER = 'M'
+    PHD = 'Phd'
+
+    DEGREE_LEVEL_CHOICES = (
+        (BACHELOR, 'Bachelor'),
+        (MASTER, 'Master'),
+        (PHD, 'Ph.D'),
+        )
+
     
+    user = models.OneToOneField(User, related_name='userProfile')
+    school = models.ForeignKey(School, blank=True, null=True)
+    company = models.ForeignKey(Company, blank=True, null=True, related_name="company")
+    following = models.ManyToManyField(Company, blank=True, related_name="following", through='FollowingCompany')
+    connectRequests = models.ManyToManyField(User, blank=True, related_name="connectRequests")
+    connections = models.ManyToManyField(User, blank=True, related_name="connections")
+
     userType = models.CharField(max_length=20, choices = USER_TYPE_CHOICES, default = STUDENT)
+    # Editable information
+    location = models.CharField(max_length=50, blank=True)
+    major = models.CharField(max_length=50, blank=True)
+    background = models.TextField(max_length=5000, blank=True)
+
+    degreelevel = models.CharField(max_length=50, choices = DEGREE_LEVEL_CHOICES, default= BACHELOR)
 
     #TODO ask TA about syntax
 
@@ -77,7 +92,6 @@ class UserProfile(models.Model):
         else:
             return "A recruiter at "+ str(self.company)
         
-
     def get_resulttype(self):
         return self.userType
 		
