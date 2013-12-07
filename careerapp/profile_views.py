@@ -235,36 +235,42 @@ def companyProfile(request):
 @login_required
 @transaction.commit_on_success
 def editProfile(request):
+        context = {}
+        userProfile = request.user.userProfile
+        print userProfile
 	if request.method == 'GET':
-                context = {}
-                user = request.user
-                userProfile = UserProfile.objects.get(user=user)
-		context['profile'] = userProfile
+                print "GOT HERE"
+		form = EditProfileForm(instance=userProfile)
+		print "SECOND"
+		context['form'] = form
 		return render(request, 'careerapp/editProfile.html', context)
+
+
+        form = EditProfileForm(request.POST)
+        context['form'] = form
+
+        if not form.is_valid():
+                return render(request, 'careerapp/editProfile.html', context)
+
+
 	
-	userProfile = UserProfile.objects.get(user=request.user)
 	
-	if 'location' in request.POST or request.POST.get['location']:
-		userProfile.location = request.POST.get['location']
-		userProfile.save()
+	if 'location' in form.cleaned_data:
+                userProfile.location = form.cleaned_data['location'];
 		
-	if 'industry' in request.POST or request.POST['industry']:
-		userProfile.industry = request.POST['industry']
-		userProfile.save()
+	if 'major' in form.cleaned_data:
+                userProfile.major = form.cleaned_data['major'];
 	
-	if 'degree' in request.POST or request.POST['degree']:
-		userProfile.degree = request.POST['degree']
-		userProfile.save()
+	if 'background' in form.cleaned_data:
+                userProfile.background = form.cleaned_data['background'];
 	
-	if 'currJobs' in request.POST or request.POST['currJobs']:
-		userProfile.currJobs = request.POST['currJobs']
-		userProfile.save()
-		
-	if 'prevJobs' in request.POST or request.POST['prevJobs']:
-		userProfile.prevJobs = request.POST['prevJobs']
-		userProfile.save()
+	if 'degreelevel' in form.cleaned_data:
+                userProfile.degreelevel =  form.cleaned_data['degreelevel'];
+
+        userProfile.save()		
 	
-	return redirect('true-profile/' + str(request.user.id))
+
+	return redirect('true-profile', request.user.id)
 
 @login_required
 @transaction.commit_on_success
