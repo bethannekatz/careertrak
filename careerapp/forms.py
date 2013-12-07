@@ -181,3 +181,9 @@ class EditPasswordForm(forms.Form):
                 if password1 and password2 and password1 != password2:
                         raise forms.ValidationError("Passwords must match.")
                 return cleaned_data
+
+
+class EditProfileForm(ModelForm):
+        class Meta:
+                model = UserProfile
+                fields = ('location', 'major', 'background', 'degreelevel')
