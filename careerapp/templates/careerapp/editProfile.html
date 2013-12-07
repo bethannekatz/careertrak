@@ -22,8 +22,31 @@
 		  {% csrf_token %}
 		  </form>
 		
+		<p>
+			<form action="{% url 'edit' %}" method="post">
+				
+			{% for error in form.non_field_errors %}
+			<p style="color:red">
+				{{error}}
+			</p>
+			{% endfor %}
+				
+			{% for field in form.visible_fields %}
+				{% for error in field.errors %}
+					<p style="color:red">
+						{{error}}
+					</p>
+				{% endfor %}
+			<b>{{field.label}}: </b>{{field}}<br>
+			{% endfor %}
+			<!--input type="hidden" value="{{company.id}}" name="companyid"-->
+			<input type="submit" value="Submit" class="btn btn-success">
+			{% csrf_token %}
+			</form>
+		</p>
+		
 		<form class="navbar-form" enctype="multipart/form-data" action="{% url 'edit' %}" method="post">
-			<input type="text" placeholder="Location" class="form-control editElem" name="location" id="elem1" value="{{profile.location}}"><br><br>
+			<input type="text" placeholder="Location" class="form-control editElem" name="location" id="elem1"><br><br>
 			<input type="text" placeholder="Industry" class="form-control editElem" name="industry"><br><br>
 			<input type="text" placeholder="Degree Earned" class="form-control editElem" name="degree"><br><br>
 			<button value="Education" class="btn btn-default btn-success">Add Education</button><br><br>
