@@ -55,8 +55,9 @@ def add_company_pic(request):
 
         # else if POST request
         #delete old photo
-        if (old_photo = Photo.objects.get(company=userProf.company).exists()):
-                old_photo.delete()
+        old_photos = Photo.obejects.filter(company=userProf.company)
+        for photo in old_photos:
+                photo.delete()
         new_photo = Photo(user=request.user, company=userProf.company)
         form = PhotoForm(request.POST, request.FILES, instance=new_photo)
         if not form.is_valid():
