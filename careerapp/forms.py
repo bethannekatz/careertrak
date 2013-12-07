@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+
 from django.contrib.auth.models import User
 from models import *
 
@@ -29,7 +29,7 @@ class StudentRegistrationForm(forms.Form):
                                 label="",
                                 widget = forms.PasswordInput(attrs={'class': 'form-control form-padding', 'placeholder': 'Confirm password'}))
 
-    emailaddress = forms.EmailField(max_length = 200,
+    emailaddress = forms.CharField(max_length = 200,
                                 label="",   
                                 widget = forms.TextInput(attrs={'class': 'form-control form-padding', 'placeholder': 'School email address'}))
 
@@ -73,8 +73,9 @@ class StudentRegistrationForm(forms.Form):
 class PhotoForm(forms.ModelForm):
 	class Meta:
 		model = Photo
-		exclude = ('user', )
-		widgets = {'picture' : forms.FileInput() }
+		exclude = ('company')
+		widgets = {'picture' : forms.FileInput(),
+                           'user' : forms.ForeignKey(User)}
 		
 class TranscriptForm(forms.ModelForm):
 	class Meta:
@@ -181,9 +182,3 @@ class EditPasswordForm(forms.Form):
                 if password1 and password2 and password1 != password2:
                         raise forms.ValidationError("Passwords must match.")
                 return cleaned_data
-
-class EditProfileForm(ModelForm):
-        class Meta:
-                model = UserProfile
-                fields = ('location', 'major', 'background', 'degreelevel')
-        
