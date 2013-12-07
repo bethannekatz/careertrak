@@ -66,7 +66,7 @@ def add_company_pic(request):
         form = PhotoForm(request.POST, request.FILES, instance=new_photo)
         if not form.is_valid():
                 context = {'form':form}
-                return render(request, 'careerapp/searchresults.html', context)
+                return render(request, 'careerapp/companyProfile.html', context)
         form.save()
         return redirect('careerapp.navigation_views.companyPage', userProf.company.id)
 	
