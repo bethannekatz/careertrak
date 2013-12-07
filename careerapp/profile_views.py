@@ -103,7 +103,6 @@ def add_letter(request):
 
 @login_required
 def get_photo(request, id):
-        print "in get photo"
 	entry = get_object_or_404(Photo, id=id)
 	if not entry.picture:
 		raise Http404
@@ -164,7 +163,7 @@ def get_range(value):
 def true_profile(request, userID):
         pg_user = User.objects.get(pk = userID)
 
-        photo = Photo.objects.filter(user = pg_user)
+        photo = Photo.objects.filter(user = pg_user, company = None)
         context = {}
 	# If a photo exists
 	if len(photo) > 0:
