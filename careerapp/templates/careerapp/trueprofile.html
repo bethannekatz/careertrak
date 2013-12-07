@@ -38,11 +38,7 @@
 						{% endif %}
 						
 						{% if canEdit %}
-						<form enctype="multipart/form-data" action="{% url 'add-photo' %}" method="post">
-							<input id="pickPhoto" type="file" class="btn btn-success btn-default" name="picture" value="Choose Photo" style="width:15em">
-							<input id="uploadPhoto" type="submit" class="btn btn-success btn-default" name="uploadPhoto" value="Upload Photo">
-							{% csrf_token %}
-						</form>
+
 						{% endif %}
 						{% if canRequest %}
 						
@@ -67,7 +63,7 @@
 							{% if isStudent %}
 							<li><h3>{{pg_user.first_name}} {{pg_user.last_name}} is a {{pg_user.userProfile.userType}} at {{pg_user.userProfile.school.name}}<h3></li>
 							<li><h4>{{pg_user.userProfile.location}}</h4></li>
-							<li><h5><b>Education:  </b>{{userProfile.degree}} {% if userProfile.degree and userProfile.major %} in {% endif %}{{pg_user.userProfile.major}}</h5></li>
+							<li><h5>{% if userProfile.degree or userProfile.major %}<b>Education:  </b>{% endif %}{{userProfile.degree}} {% if userProfile.degree and userProfile.major %} in {% endif %}{{pg_user.userProfile.major}}</h5></li>
 							{% endif %}
 							{% if isRecruiter %}
 							<li><h3>{{pg_user.first_name}} {{pg_user.last_name}} is a {{pg_user.userProfile.userType}} at {{pg_user.userProfile.company.name}}<h3></li>
