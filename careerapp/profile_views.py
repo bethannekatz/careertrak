@@ -35,6 +35,10 @@ def add_profile_pic(request):
 		return render(request, 'careerapp/trueprofile.html', context)
 	
 	# else if POST request
+	#delete old photo
+        old_photos = Photo.objects.filter(user=request.user, company=None)
+        for photo in old_photos:
+                photo.delete()
 	new_photo = Photo(user=request.user)
 	form = PhotoForm(request.POST, request.FILES, instance=new_photo)
 	if not form.is_valid():
@@ -75,6 +79,10 @@ def add_transcript(request):
 		return render(request, 'careerapp/trueprofile.html', context)
 		
 	# else if POST request
+	#delete old transcript
+        old_transcript = Transcript.objects.filter(user=request.user)
+        for transcript in old_transcripts:
+                transcript.delete()
 	new_transcript = Transcript(user=request.user)
 	form = TranscriptForm(request.POST, request.FILES, instance=new_transcript)
 	print form.errors
@@ -91,6 +99,10 @@ def add_letter(request):
 		return render(request, 'careerapp/trueprofile.html', context)
 		
 	# else if POST request
+	#delete old letters
+        old_letter = Letter.objects.filter(user=request.user)
+        for letter in old_letters:
+                letter.delete()
 	new_letter = Letter(user=request.user)
 	form = LetterForm(request.POST, request.FILES, instance=new_letter)
 	print form.errors
