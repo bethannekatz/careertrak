@@ -118,12 +118,15 @@
             
           <a href="{% url 'add-experience' %}"><button type="submit" class="btn btn-success" >Add Experience</button></a>
 		  {% endif %}
+
+            {% if pg_user.background %}
             <div class="row">
 				<div class="span4 well">
 					<h2>Background</h2>
 					<p>{{pg_user.background}}</p>
 				</div>
 			</div><!--/span-->
+        {% endif %}
 
             {% for experience in experiences %}
 			<div class="row">
