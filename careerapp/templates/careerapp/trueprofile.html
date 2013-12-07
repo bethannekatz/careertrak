@@ -32,7 +32,7 @@
 				<div class="jumbotron container block span4" id="profileDiv" style="float:left">
 					<div class="col-md-4">
 						{% if photoID %}
-						<img src="{% url 'get-photo' photoID %}" alt="profilePicture" width="90%" height="90%">
+						<img src="{% url 'get-photo' photoID %}" alt="profilePicture" width="160" height="160">
                         {% else %}
                         <img src="http://www.pledgecents.com/images/ProfilePlaceholderSuit.png" alt="profilePicture" width="90%" height="90%">
 						{% endif %}
