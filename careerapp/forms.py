@@ -183,7 +183,7 @@ class EditPasswordForm(forms.Form):
                 return cleaned_data
 
 
-class EditProfileForm(ModelForm):
+class EditProfileForm(forms.ModelForm):
         class Meta:
                 model = UserProfile
                 fields = ('location', 'major', 'background', 'degreelevel')
