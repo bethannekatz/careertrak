@@ -21,6 +21,13 @@
 		  <input id="uploadTranscript" type="submit" class="btn btn-succes btn-defulat" name="transcript" value="Upload Transcript">
 		  {% csrf_token %}
 		  </form>
+
+          <!-- Upload Photo Stuff -->
+          <form enctype="multipart/form-data" action="{% url 'add-photo' %}" method="post">
+		   <input id="pickPhoto" type="file" class="btn btn-success btn-default" name="picture" value="Choose Photo" style="width:15em">
+	       <input id="uploadPhoto" type="submit" class="btn btn-success btn-default" name="uploadPhoto" value="Upload Photo">
+		   {% csrf_token %}
+    	  </form>
 		
 		<p>
 			<form action="{% url 'edit' %}" method="post">
@@ -44,20 +51,7 @@
 			{% csrf_token %}
 			</form>
 		</p>
-		
-		<form class="navbar-form" enctype="multipart/form-data" action="{% url 'edit' %}" method="post">
-			<input type="text" placeholder="Location" class="form-control editElem" name="location" id="elem1"><br><br>
-			<input type="text" placeholder="Industry" class="form-control editElem" name="industry"><br><br>
-			<input type="text" placeholder="Degree Earned" class="form-control editElem" name="degree"><br><br>
-			<button value="Education" class="btn btn-default btn-success">Add Education</button><br><br>
-			<!--input type="text" placeholder="Employer" class="form-control editElem"><br><br>
-			<button value="Employer" class="btn btn-default btn-success">Add Employer</button><br><br>
-			<input value="Change Profile Picture" class="btn btn-default" type="file"><br-->
-			<input type="text" placeholder="Current Jobs" class="form-control" name="currJobs"><br><br>
-			<input type="text" placeholder="Previous Jobs" class="form-control" name="prevJobs"><br><br>
-			<button value="Submit" class="btn btn-default btn-success" type="submit">Submit</button>
-			{% csrf_token %}
-		</form>
+	
 	</div>
 	{% endblock %}
 </body>
