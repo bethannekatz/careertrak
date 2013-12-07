@@ -58,15 +58,15 @@ def add_company_pic(request):
                 return render(request, 'careerapp/companyProfile.html', context)
 
         # else if POST request
-        #delete old photo
+        # delete old photo
         old_photos = Photo.objects.filter(company=userProf.company)
         for photo in old_photos:
                 photo.delete()
-        new_photo = Photo(user=request.user, company=userProf.company)
+        new_photo = Photo(company=userProf.company)
         form = PhotoForm(request.POST, request.FILES, instance=new_photo)
         if not form.is_valid():
                 context = {'form':form}
-                return render(request, 'careerapp/companyProfile.html', context)
+                return render(request, 'careerapp/searchresults.html', context)
         form.save()
         return redirect('careerapp.navigation_views.companyPage', userProf.company.id)
 	
