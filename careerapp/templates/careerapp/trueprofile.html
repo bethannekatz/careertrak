@@ -67,6 +67,8 @@
 							{% endif %}
 							{% if isRecruiter %}
 							<li><h3>{{pg_user.first_name}} {{pg_user.last_name}} is a {{pg_user.userProfile.userType}} at {{pg_user.userProfile.company.name}}<h3></li>
+                            <li><h4>{{pg_user.userProfile.location}}</h4></li>
+                            <li><h5>{%if pg_user.userProfile.schools %}Recruits for: {{pg_user.userProfile.schools}}{% endif %}</h5></li>
 							{% endif %}
 
 						</ul>
@@ -111,6 +113,16 @@
 		  {% endblock %}
           <div class="row">
 		  {% block info %}
+
+          {% if pg_user.background %}
+            <div class="row">
+				<div class="span4 well">
+					<h2>Background</h2>
+					<p>{{pg_user.background}}</p>
+				</div>
+			</div><!--/span-->
+          {% endif %}
+
 		  {% if isStudent %}
 		  {% if canEdit %}
 
@@ -124,14 +136,7 @@
           <a href="{% url 'add-experience' %}"><button type="submit" class="btn btn-success" >Add Experience</button></a>
 		  {% endif %}
 
-            {% if pg_user.background %}
-            <div class="row">
-				<div class="span4 well">
-					<h2>Background</h2>
-					<p>{{pg_user.background}}</p>
-				</div>
-			</div><!--/span-->
-        {% endif %}
+
 
             {% for experience in experiences %}
 			<div class="row">
