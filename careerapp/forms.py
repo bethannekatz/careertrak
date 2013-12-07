@@ -73,9 +73,8 @@ class StudentRegistrationForm(forms.Form):
 class PhotoForm(forms.ModelForm):
 	class Meta:
 		model = Photo
-		exclude = ('company')
-		widgets = {'picture' : forms.FileInput(),
-                           'user' : forms.ForeignKey(User)}
+		exclude = ('user', 'company')
+		widgets = {'picture' : forms.FileInput() }
 		
 class TranscriptForm(forms.ModelForm):
 	class Meta:
