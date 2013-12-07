@@ -293,7 +293,7 @@ def recruiterEdit(request):
                 userProfile.background = form.cleaned_data['background'];
 	
 	if 'schools' in form.cleaned_data:
-                userProfile.degreelevel =  form.cleaned_data['schools'];
+                userProfile.schools =  form.cleaned_data['schools'];
 
         userProfile.save()		
 	
