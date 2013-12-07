@@ -25,7 +25,7 @@
 
   <body>
 
-	{% block title %} Profile Page {% endblock %}
+	{% block title %} {{pg_user.first_name}} {{pg_user.last_name}} {% endblock %}
 
 		    {% block content %}
 			<div class="row">

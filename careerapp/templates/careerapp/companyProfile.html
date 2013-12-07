@@ -14,7 +14,7 @@
 
   <body>
 
-	{% block title %} Company Profile Page {% endblock %}
+	{% block title %} {{company}} {% endblock %}
 
 		    {% block content %}
 			<div class="row">
@@ -102,13 +102,6 @@
 				</div>			
 			{% endfor %}
 
-			<div class="row">
-				<div class="span4 nav well">
-					<h2>Babysitting</h2>
-					<li><p>Why would you come to Microsoft to babysit? Who knows!</p><br>
-					<p><a class="btn btn-default" href="/posting">View details &raquo;</a></p>
-				</div>
-			</div>
 			<!--/span-->
 			{% endblock %}
           </div><!--/row-->
