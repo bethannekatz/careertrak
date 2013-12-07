@@ -91,7 +91,7 @@ class LetterForm(forms.ModelForm):
 class ExperienceForm(forms.ModelForm):
         class Meta:
                 model = Experience
-                excluse = ('user', )
+                exclude = ('user', )
 
 class RecruiterRegistrationForm(forms.Form):
     first_name = forms.CharField(max_length = 30,
