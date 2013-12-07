@@ -159,17 +159,34 @@ def search(request):
         if request.method == 'GET':
                 return redirect('profile')
 
-        queryString = request.POST['query']
+        q = request.POST['query']
         resultList = []
-        resultList.extend(Company.objects.filter(name__icontains=queryString))
-        resultList.extend(UserProfile.objects.filter(school__name__icontains=queryString))
-        resultList.extend(UserProfile.objects.filter(user__first_name__icontains=queryString))
-        resultList.extend(UserProfile.objects.filter(user__last_name__icontains=queryString))
-        resultList.extend(JobListing.objects.filter(title__icontains=queryString))
-        resultList.extend(JobListing.objects.filter(location__icontains=queryString))
-        resultList.extend(JobListing.objects.filter(category__icontains=queryString))
-        resultList.extend(JobListing.objects.filter(text__icontains=queryString))
-        resultList.extend(JobListing.objects.filter(company__name__icontains=queryString))
+        companies = Company.objects.filter(
+                Q(name__icontains=q))
+
+        resultList.extend(companies)
+        
+        profiles = UserProfile.objects.filter(
+                Q(school__name__icontains=q) | Q(user__first_name__icontains=q)
+                | Q(user__last_name__icontains=q))
+
+        resultList.extend(profiles)
+        
+        jlistings = JobListing.objects.filter(
+                Q(title__icontains=q) | Q(location__icontains=q) | Q(category__icontains=q)
+                | Q(text__icontains=q) | Q(company__name__icontains=q))
+        
+        resultList.extend(jlistings)
+
+##        resultList.extend(Company.objects.filter(name__icontains=queryString))
+##        resultList.extend(UserProfile.objects.filter(school__name__icontains=queryString))
+##        resultList.extend(UserProfile.objects.filter(user__first_name__icontains=queryString))
+##        resultList.extend(UserProfile.objects.filter(user__last_name__icontains=queryString))
+##        resultList.extend(JobListing.objects.filter(title__icontains=queryString))
+##        resultList.extend(JobListing.objects.filter(location__icontains=queryString))
+##        resultList.extend(JobListing.objects.filter(category__icontains=queryString))
+##        resultList.extend(JobListing.objects.filter(text__icontains=queryString))
+##        resultList.extend(JobListing.objects.filter(company__name__icontains=queryString))
 ##
        
         context['results'] = resultList
