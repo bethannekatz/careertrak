@@ -140,10 +140,10 @@ class Letter(models.Model):
 	user = models.ForeignKey(User)
 
 class Experience(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField(max_length=5000)
+    title = models.CharField(max_length=100, blank=False)
+    description = models.TextField(max_length=5000, blank=False)
     user = models.ForeignKey(User)
-    current = models.BooleanField()
+    #current = models.BooleanField()
 
     def get_current_experience(self, user):
         return Experience.objects.filter(user=user, current=True)

@@ -78,7 +78,8 @@
 						</ul>
 						<!--form-->
 						{% if canEdit %}
-						<a href="{% url 'edit' %}"> <button  class="btn btn-default btn-success">Edit</button></a>
+
+						<a href="{% url 'edit' %}"> <button class="btn btn-default btn-success">Edit</button></a>
 						{% endif %}
 						
 						{% if connections %}
@@ -120,6 +121,8 @@
 		  {% if letterID %}
 		  <object src="{% url 'get-letter' letterID %}" alt="letter"><a href="{% url 'get-letter' letterID %}">Letter of Recommendation</a></object>
 		  {% endif %}
+            
+          <a href="{% url 'add-experience' %}"><button type="submit" class="btn btn-success" >Add Experience</button></a>
 		  {% endif %}
             <div class="row">
 				<div class="span4 well">
@@ -128,20 +131,17 @@
 					<p><a class="btn btn-default" href="#">View details &raquo;</a></p>
 				</div>
 			</div><!--/span-->
+
+            {% for experience in experiences %}
 			<div class="row">
 				<div class="span4 nav well">
 					<h2>Experience</h2>
-					<li><h3>Microsoft Program Manager Intern</h3><br>
-					     <p>Designed new system to release Windows Updates to customers.</p></li>
+					<li><h3>{{experience.title}}</h3><br>
+					     <p>{{experience.description}}</p></li>
 				</div>
 			</div><!--/span-->
-			<div class="row">
-				<div class="span4 nav well">
-					<h2>Experience</h2>
-					<li><h3>Google Engineering Practicum Intern</h3><br>
-					     <p>Wrote tool for hardware profiling.</p></li>
-				</div>
-			</div><!--/span-->
+            {% endfor %}
+
 			{% endif %}
 			{% endblock %}
           </div><!--/row-->
