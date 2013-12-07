@@ -44,13 +44,13 @@
 					<a href="{% url 'company' result.id %}">{% ifequal result.name photo.company.name %}<img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">{% endifequal %}</a>
 				
 				{% elif result.get_resulttype == 'student' %}
-					<a href="{% url 'true-profile' result.id %}"><img src="/static/images/microsoft.png" width="20%" height="20%" style="float:left"></a>
+					<a href="{% url 'true-profile' result.id %}">{% ifequal result.user photo.user %}<img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">{% endifequal %}</a>
 				
 				{% elif result.get_resulttype == 'recruiter' %}
-					<a href="{% url 'true-profile' result.id %}"><img src="/static/images/microsoft.png" width="20%" height="20%" style="float:left"></a>
+					<a href="{% url 'true-profile' result.id %}">{% ifequal result.user photo.user %}<img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">{% endifequal %}</a>
 
 				{% elif result.get_resulttype == 'Job Posting' %}
-				<a href="{% url 'company' result.company.id %}"><img src="/static/images/microsoft.png" width="20%" height="20%" style="float:left"></a>
+				<a href="{% url 'company' result.company.id %}">{% ifequal result.company photo.company.name %}<img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">{% endifequal %}</a>
 			
 				{% endif %}
                 {% endfor %}
