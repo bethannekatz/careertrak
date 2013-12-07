@@ -244,8 +244,8 @@ def editProfile(request):
 	
 	userProfile = UserProfile.objects.get(user=request.user)
 	
-	if 'location' in request.POST or request.POST['location']:
-		userProfile.location = request.POST['location']
+	if 'location' in request.POST or request.POST.get['location']:
+		userProfile.location = request.POST.get['location']
 		userProfile.save()
 		
 	if 'industry' in request.POST or request.POST['industry']:
