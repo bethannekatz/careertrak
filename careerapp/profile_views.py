@@ -54,8 +54,9 @@ def add_company_pic(request):
                 return render(request, 'careerapp/companyProfile.html', context)
 
         # else if POST request
-        print "Company: "
-        print userProf.company.name
+        #delete old photo
+        if (old_photo = Photo.objects.get(company=userProf.company).exists()):
+                old_photo.delete()
         new_photo = Photo(user=request.user, company=userProf.company)
         form = PhotoForm(request.POST, request.FILES, instance=new_photo)
         if not form.is_valid():
