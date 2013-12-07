@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
         # initialization
         url(r'^resetdb$', 'careerapp.init_views.resetdb'),
+        url(r'^loadschools$', 'careerapp.account_views.loadschools'),
 
         ########################
         #  Account Management  #
@@ -38,6 +39,7 @@ urlpatterns = patterns('',
         url(r'^profile$', 'careerapp.profile_views.profile', name='profile'),
         url(r'^true-profile/(?P<userID>[0-9_@\+\-]+)$', 'careerapp.profile_views.true_profile', name='true-profile'),
 	url(r'^edit-profile$', 'careerapp.profile_views.editProfile', name='edit'),
+        url(r'^add-experience$', 'careerapp.profile_views.addExperience', name='add-experience'),
   	url(r'^add-photo$', 'careerapp.profile_views.add_profile_pic', name='add-photo'),
   	url(r'^add-company-photo$', 'careerapp.profile_views.add_company_pic', name='add-company-photo'),
 	url(r'^get-photo/(?P<id>\d+)$', 'careerapp.profile_views.get_photo', name='get-photo'),

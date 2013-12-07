@@ -89,6 +89,8 @@ def add_transcript(request):
 	if not form.is_valid():
 		context = {'form':form}
 		return render(request, 'careerapp/trueprofile.html', context)
+	form.save()
+	return redirect('true-profile', request.user.id)
 		
 @login_required
 def add_letter(request):
@@ -99,7 +101,7 @@ def add_letter(request):
 		return render(request, 'careerapp/trueprofile.html', context)
 		
 	# else if POST request
-	#delete old letters
+	# delete old letters
         old_letter = Letter.objects.filter(user=request.user)
         for letter in old_letters:
                 letter.delete()
@@ -175,6 +177,8 @@ def get_range(value):
 def true_profile(request, userID):
         pg_user = User.objects.get(pk = userID)
 
+        experiences = Experience.objects.filter(user=request.user)
+
         photo = Photo.objects.filter(user = pg_user, company = None)
         context = {}
 	# If a photo exists
@@ -193,6 +197,7 @@ def true_profile(request, userID):
         context['pg_user'] = pg_user
 	context['school']       = userProfile.school
 	context['company']      = userProfile.company
+	context['experiences'] = experiences
 
         if (userProfile.userType == UserProfile.STUDENT):
                 context['isStudent'] = 'true'
@@ -260,3 +265,20 @@ def editProfile(request):
 		userProfile.save()
 	
 	return redirect('true-profile/' + str(request.user.id))
+
+@login_required
+@transaction.commit_on_success
+def addExperience(request):
+        if request.method == 'GET':
+                context = {'form' : ExperienceForm()}
+                return render(request, 'careerapp/addExperience.html', context)
+
+        # else if POST request
+        new_experience = Experience(user = request.user)
+        form = ExperienceForm(request.POST, instance = new_experience)
+        if not form.is_valid():
+                context = {'form' : form)
+                return render(request, 'careerapp/addExperience.html', context)
+        # if form is valid
+        form.save()
+        return redirect('true-profile', request.user.id)
