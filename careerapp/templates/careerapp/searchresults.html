@@ -42,9 +42,12 @@
                 {% for photo in photos %}
 				{% if result.get_resulttype == 'Company' %}
 					<a href="{% url 'company' result.id %}">{% ifequal result.name photo.company.name %}<img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">{% endifequal %}</a>
-				
+
 				{% elif result.get_resulttype == 'student' %}
-					<a href="{% url 'true-profile' result.id %}">{% ifequal result.user photo.user %}<img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">{% endifequal %}</a>
+					<a href="{% url 'true-profile' result.id %}">
+                        {% ifequal result.user photo.user %}
+                            <img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">
+                        {% endifequal %}</a>
 				
 				{% elif result.get_resulttype == 'recruiter' %}
 					<a href="{% url 'true-profile' result.id %}">{% ifequal result.user photo.user %}<img src="{% url 'get-photo' photo.id %}" width="20%" height="20%" style="float:left">{% endifequal %}</a>
