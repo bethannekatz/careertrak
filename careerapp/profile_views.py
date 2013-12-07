@@ -55,7 +55,7 @@ def add_company_pic(request):
 
         # else if POST request
         #delete old photo
-        old_photos = Photo.obejects.filter(company=userProf.company)
+        old_photos = Photo.objects.filter(company=userProf.company)
         for photo in old_photos:
                 photo.delete()
         new_photo = Photo(user=request.user, company=userProf.company)
