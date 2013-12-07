@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-$('.stars').stars();
+$('span.stars').stars();
 });
 
 
