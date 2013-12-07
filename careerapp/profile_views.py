@@ -251,9 +251,6 @@ def editProfile(request):
 
         if not form.is_valid():
                 return render(request, 'careerapp/editProfile.html', context)
-
-
-	
 	
 	if 'location' in form.cleaned_data:
                 userProfile.location = form.cleaned_data['location'];
@@ -266,6 +263,37 @@ def editProfile(request):
 	
 	if 'degreelevel' in form.cleaned_data:
                 userProfile.degreelevel =  form.cleaned_data['degreelevel'];
+
+        userProfile.save()		
+	
+
+	return redirect('true-profile', request.user.id)
+
+@login_required
+@transaction.commit_on_success
+def recruiterEdit(request):
+        context = {}
+        userProfile = request.user.userProfile
+	if request.method == 'GET':
+		form = RecruiterEditProfileForm(instance=userProfile)
+		context['form'] = form
+		return render(request, 'careerapp/recruiterEditProfile.html', context)
+
+
+        form = RecruiterEditProfileForm(request.POST)
+        context['form'] = form
+
+        if not form.is_valid():
+                return render(request, 'careerapp/editProfile.html', context)
+	
+	if 'location' in form.cleaned_data:
+                userProfile.location = form.cleaned_data['location'];
+	
+	if 'background' in form.cleaned_data:
+                userProfile.background = form.cleaned_data['background'];
+	
+	if 'schools' in form.cleaned_data:
+                userProfile.degreelevel =  form.cleaned_data['schools'];
 
         userProfile.save()		
 	

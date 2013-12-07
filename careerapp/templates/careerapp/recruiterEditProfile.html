@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends "careerapp/base.html" %}
+<head>
+</head>
+<body>
+	{% block content %}
+	<div class="well container" id="editDiv">
+		<h1>Edit Profile</h1>
+					
+		<!-- Transcript and Letter of Recommendation -->
+		  <!-- Letter of Recommendation Stuff -->
+		  <form enctype="multipart/form-data" action="{% url 'add-letter' %}" method="post">
+		  <input id="pickLetter" type="file" class="btn btn-success btn-default" name="letter" value="Choose Letter of Recommendation">
+		  <input id="uploadLetter" type="submit" class="btn btn-succes btn-defulat" name="letter" value="Upload Letter of Recommendation">
+		  {% csrf_token %}
+		  </form>
+		  
+		  <!--Transcript Stuff -->
+		  <form enctype="multipart/form-data" action="{% url 'add-transcript' %}" method="post">
+		  <input id="pickTranscript" type="file" class="btn btn-success btn-default" name="transcript" value="Choose Transcript">
+		  <input id="uploadTranscript" type="submit" class="btn btn-succes btn-defulat" name="transcript" value="Upload Transcript">
+		  {% csrf_token %}
+		  </form>
+
+          <!-- Upload Photo Stuff -->
+          <form enctype="multipart/form-data" action="{% url 'add-photo' %}" method="post">
+		   <input id="pickPhoto" type="file" class="btn btn-success btn-default" name="picture" value="Choose Photo" style="width:15em">
+	       <input id="uploadPhoto" type="submit" class="btn btn-success btn-default" name="uploadPhoto" value="Upload Photo">
+		   {% csrf_token %}
+    	  </form>
+		
+		
+			<form action="{% url 'edit' %}" method="post">
+				
+			{% for error in form.non_field_errors %}
+			<p style="color:red">
+				{{error}}
+			</p>
+			{% endfor %}
+				
+			{% for field in form.visible_fields %}
+				{% for error in field.errors %}
+					<p style="color:red">
+						{{error}}
+					</p>
+				{% endfor %}
+			<b>{{field.label}}: </b>{{field}}<br>
+			{% endfor %}
+			<!--input type="hidden" value="{{company.id}}" name="companyid"-->
+			<input type="submit" value="Submit" class="btn btn-success">
+			{% csrf_token %}
+			</form>
+		
+	
+	</div>
+	{% endblock %}
+</body>

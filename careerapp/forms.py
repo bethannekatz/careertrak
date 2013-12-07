@@ -187,3 +187,8 @@ class EditProfileForm(forms.ModelForm):
         class Meta:
                 model = UserProfile
                 fields = ('location', 'major', 'background', 'degreelevel')
+
+class RecruiterEditProfileForm(forms.ModelForm):
+        class Meta:
+                model = UserProfile
+                fields = ('location', 'background', 'schools')

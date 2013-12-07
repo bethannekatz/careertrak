@@ -65,10 +65,13 @@ class UserProfile(models.Model):
     connections = models.ManyToManyField(User, blank=True, related_name="connections")
 
     userType = models.CharField(max_length=20, choices = USER_TYPE_CHOICES, default = STUDENT)
-    # Editable information
+    # Editable information 
     location = models.CharField(max_length=50, blank=True)
     major = models.CharField(max_length=50, blank=True)
     background = models.TextField(max_length=5000, blank=True)
+
+    # Recruiter-specific Editable Information
+    schools = models.CharField(max_length=100, blank=True)
 
     degreelevel = models.CharField(max_length=50, choices = DEGREE_LEVEL_CHOICES, default= BACHELOR)
 

@@ -73,7 +73,12 @@
 						<!--form-->
 						{% if canEdit %}
 
-						<a href="{% url 'edit' %}"> <button class="btn btn-default btn-success">Edit</button></a>
+                        {% if isStudent %}
+						<a href="{% url 'edit' %}"> 
+                        {% else %}
+                        <a href="{% url 'recruiter-edit' %}">
+                        {% endif %}
+                            <button class="btn btn-default btn-success">Edit</button></a>
 						{% endif %}
 						
 						{% if connections %}
