@@ -45,6 +45,7 @@ class UserProfile(models.Model):
     degree = models.CharField(max_length=50, blank=True)
     prevJobs = models.CharField(max_length=500, blank=True)
     currJobs = models.CharField(max_length=500, blank=True)
+    background = models.TextField(max_length=5000, blank=True)
 
 
     STUDENT = 'student'
@@ -101,7 +102,7 @@ class Photo(models.Model):
 
 class JobListing(models.Model):
     title = models.CharField(max_length=50)
-    text = models.CharField(max_length = 1000)
+    text = models.TextField(max_length = 5000)
     company = models.ForeignKey(Company, blank=False, related_name='postings')
     creation_time = models.DateTimeField(default=datetime.datetime.now, editable=False)
 
@@ -126,7 +127,10 @@ class Letter(models.Model):
 	letter = models.FileField(upload_to="letters", blank=True)
 	user = models.ForeignKey(User)
 
-
+class Experience(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField(max_length=5000)
+    user = models.ForeignKey(User)
 
 ##class CommonResume(models.Model):
 ##    experience = models.CharField(max_length=500)

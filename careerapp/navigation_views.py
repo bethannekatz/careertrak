@@ -23,6 +23,8 @@ from django.contrib.sites.models import get_current_site
 
 from django.db import transaction
 
+from django.db.models import Q
+
 # show job listings from companies this user follows
 
 @login_required
