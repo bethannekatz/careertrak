@@ -43,8 +43,6 @@ class UserProfile(models.Model):
     connections = models.ManyToManyField(User, blank=True, related_name="connections")
     location = models.CharField(max_length=50, blank=True)
     degree = models.CharField(max_length=50, blank=True)
-    prevJobs = models.CharField(max_length=500, blank=True)
-    currJobs = models.CharField(max_length=500, blank=True)
     background = models.TextField(max_length=5000, blank=True)
 
 
@@ -131,6 +129,11 @@ class Experience(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=5000)
     user = models.ForeignKey(User)
+    current = models.BooleanField()
+
+    def get_current_experience(self, user):
+        return Experience.objects.filter(user=user, current=True)
+        
 
 ##class CommonResume(models.Model):
 ##    experience = models.CharField(max_length=500)
